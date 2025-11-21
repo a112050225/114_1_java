@@ -1,0 +1,52 @@
+public class ShieldSwordsMan extends SwordsMan{
+    private int defenseCapacity;
+    // 建構子：初始化持盾劍士的名稱、生命值和攻擊力
+    public ShieldSwordsMan(String name, int health, int attackPower, int defenseCapacity) {
+        super(name, health, attackPower);
+        this.defenseCapacity = defenseCapacity;
+    }
+
+    // 攻擊對手(劍客/魔法師)，父類別的參考指到子類別物件
+    @Override
+    public void attack(Role opponent) {
+        int reducedDamage = this.getAttackPower() - 5; // 持盾劍士攻擊力減少5點
+        opponent.setHealth(opponent.getHealth() - reducedDamage);
+        System.out.println(this.getName() + " 揮劍攻擊 " + opponent.getName() + " 造成 " +
+                reducedDamage + " 點傷害。" + opponent);
+    }
+
+    public int getDefenseCapacity() {
+        return defenseCapacity;
+    }
+
+    public void defence() {
+        this.setHealth(this.getHealth() + defenseCapacity);
+        System.out.println(this.getName() + " 使用盾牌防禦，恢復 " + defenseCapacity + " 點生命值。" + this);
+    }
+    @Override
+    public void showSpecialSkill() {
+        System.out.println("╔═════════════════════════════╗");
+        System.out.println("║     持盾劍士 的特殊技能        ║");
+        System.out.println("╠═════════════════════════════╣");
+        System.out.println("║     技能名稱：堅固防禦         ║");
+        System.out.println("║     技能描述：使用盾牌防禦     ║");
+        System.out.println("║ 　　技能效果：每次防禦回復盾牌防禦力 ║");
+        System.out.println("╚═════════════════════════════╝");
+
+
+    }
+    @Override
+    public void onDeath() {
+        System.out.println("倒下，盾牌和劍都掉落\n" + this.getName() + " 已經倒下了！");
+
+    }
+
+    public void prepareBattle() {
+        System.out.println("舉起盾牌，準備迎接挑戰...");
+    }
+    public void afterBattle() {
+        System.out.println("可以休息一下了...");
+
+    }
+
+}
